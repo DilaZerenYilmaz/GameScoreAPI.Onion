@@ -11,11 +11,11 @@ namespace GameScoreAPI.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class MatchController : ControllerBase
+	public class MatchesController : ControllerBase
 	{
 		private readonly IMediator _mediator;
 
-		public MatchController(IMediator mediator)
+		public MatchesController(IMediator mediator)
 		{
 			_mediator = mediator;
 		}
