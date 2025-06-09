@@ -1,0 +1,21 @@
+appsettings.json
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build
+bin/
+obj/
+
+# Rider
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Others
+*.log
