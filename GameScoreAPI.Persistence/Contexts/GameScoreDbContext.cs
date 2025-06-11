@@ -20,6 +20,44 @@ namespace GameScoreAPI.Persistence.Contexts
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(GameScoreDbContext).Assembly);
 			base.OnModelCreating(modelBuilder);
+			modelBuilder.Entity<Ability>()
+				.HasOne(a => a.Player)
+				.WithMany(p => p.Abilities)
+				.HasForeignKey(a => a.PlayerId);
+
+			modelBuilder.Entity<Match>()
+				.HasOne(m => m.Team)
+				.WithMany(t => t.Matches)
+				.HasForeignKey(m => m.TeamId);
+
+			modelBuilder.Entity<Player>()
+				.HasOne(p => p.Team)
+				.WithMany(t => t.Players)
+				.HasForeignKey(p => p.TeamId);
+
+			modelBuilder.Entity<Ability>()
+				.HasOne(a => a.Player)
+				.WithMany(p => p.Abilities)
+				.HasForeignKey(a => a.PlayerId);
+
+			modelBuilder.Entity<PlayerMatchStats>()
+				.HasKey(pms => new { pms.PlayerId, pms.MatchId });
+
+			modelBuilder.Entity<PlayerMatchStats>()
+				.HasOne(pms => pms.Player)
+				.WithMany(p => p.MatchStats)
+				.HasForeignKey(pms => pms.PlayerId);
+
+			modelBuilder.Entity<PlayerMatchStats>()
+				.HasOne(pms => pms.Match)
+				.WithMany(m => m.MatchStats)
+				.HasForeignKey(pms => pms.MatchId);
+
+			modelBuilder.Entity<PlayerItemInMatch>()
+				.HasOne(pi => pi.Item)
+				.WithMany(pms => pms.Items)
+				.HasForeignKey(pi => new { pi.PlayerId, pi.MatchId });
+
 		}
 	}
 }

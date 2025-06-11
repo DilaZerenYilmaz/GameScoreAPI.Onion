@@ -12,6 +12,13 @@ namespace GameScoreAPI.Domain.Entities
 		public string Name { get; set; } = null!;
 		public int Score { get; set; }
 
+		public ICollection<Ability> Abilities { get; set; } = new List<Ability>();
+		public ICollection<Item> Items { get; set; } = new List<Item>();
+
 		public ICollection<Match> Matches { get; set; } = new List<Match>();
+		public ICollection<PlayerMatchStats> MatchStats { get; set; } = new List<PlayerMatchStats>();
+
+		public int TeamId { get; set; }
+		public Team Team { get; set; } = new Team();
 	}
 }
